@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}tempalte-blogpage{% endblock %}
 
@@ -10,6 +10,13 @@
 
   <div class="intro">{{ page.intro }}</div>
   {{ page.body|richtext }}
+
+  {% for item in page.gallery_images.all %}
+    <a href="#"><div style="float: inline-start; margin: 10px;">
+      {% image item.image fill-320x240 %}
+      <p>{{ item.caption }}</p>
+    </div></a>
+  {% endfor %}
 
   <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
 {% endblock %}
